@@ -43,11 +43,6 @@ function add(firstName, lastName, email, phoneNumber) {
         lastName: lastName,
         email: email,
         phoneNumber: phoneNumber
-    };
-};
-
-
-
-add("PeeterASD","Mees","asdasd@gmail.com","112");
-list();
+    }
+}
 
