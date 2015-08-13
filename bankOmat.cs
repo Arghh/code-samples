@@ -1,76 +1,77 @@
-﻿using System;
+using System;
 using System.Globalization;
 
 
 namespace BankOmant
 {
-    class Program
+  class Program
+  {
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {   //TODO dont accept negative number. restart programm. test values. make a function. 
-            //if user enters letters instead of numbers give error
-            try
-            {
-                int m;
-                string sum;
-                Console.OutputEncoding = System.Text.Encoding.UTF8;
-                Console.WriteLine("How many € would you like to withdrawal today?");
-                sum = Console.ReadLine();
-                m = Int32.Parse(sum);
+      try
+      {
+        int m;
+        string sum;
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-                //if the entered amout does not devide with 5
-                if (m % 5 != 0)
-                {
-                    Console.WriteLine("We only have 50€, 20€, 10€ and 5€ banknotes available");
-                    Console.WriteLine(m + " € is not a correct amount.");
-                }
-                //if user entered a correct amout
-                else
-                {
-                    //take the sum amout(m) and fits it into 50,20,10 and 5. shows how many of which notes were given. 
-                    int firstRemainder; //remainders are the leftover amout
-                    int secondRemainder;
-                    int thirdRemainder;
-                    int fourthRemainder;
+        Console.WriteLine("How much would you like to take out today?");
+        sum = Console.ReadLine();
+        m = Int32.Parse(sum);
+        
+        if (m % 5 != 0)
+        {
+          Console.WriteLine("We only have 50€, 20€, 10€ and 5€ banknotes available");
+          Console.WriteLine(m + " € is not a correct amount.");
+        }
 
-                    int numOf50s = (Math.DivRem(m, 50, out firstRemainder));
-                    if (numOf50s != 0)
-                    {
-                        Console.WriteLine("You received " + numOf50s + " 50€");
-                    }
+        else if (m < 0)
+        {
+          Console.WriteLine("You can't take out a negative sum of money.");
+        }
+    
+        else
+        {
+          Helpers.calculator(m, 50);
 
+          if (m >= 50)
+          {
+            Console.WriteLine("You received " + Helpers.calculator(m, 50) + " 50€");
+          }
 
-                    int numOf20s = (Math.DivRem(firstRemainder, 20, out secondRemainder));
-                    if (numOf20s != 0)
-                    {
-                        Console.WriteLine("You received " + numOf20s + " 20€");
-                    }
+          if (Helpers.rest >= 20)
+          {
+            Console.WriteLine("You received " + Helpers.calculator(Helpers.rest, 20) + " 20€");
+          }
 
+          if (Helpers.rest >=10)
+          {
+            Console.WriteLine("You received " + Helpers.calculator(Helpers.rest, 10) + " 10€");
+          }
 
-                    int numOf10s = (Math.DivRem(secondRemainder, 10, out thirdRemainder));
-                    if (numOf10s != 0)
-                    {
-                        Console.WriteLine("You received " + numOf10s + " 10€");
-                    }
+          if (Helpers.rest >= 5)
+          {
+            Console.WriteLine("You received " + Helpers.calculator(Helpers.rest, 5) + " 5€");
+          }
 
-
-                    int numOf5s = (Math.DivRem(thirdRemainder, 5, out fourthRemainder));
-                    if (numOf5s != 0)
-                    {
-                        Console.WriteLine("You received " + numOf5s + " 5€");
-                    }
-
-                    Console.WriteLine("Have a nice day!");
-
-                }
-            }
-
-
-            catch (FormatException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            Console.ReadLine();
+          Console.WriteLine("Have a nice day!");
         }
     }
+
+    catch (FormatException e)
+      {
+        Console.WriteLine(e.Message);
+      }
+    }
+  }
+
+  class Helpers
+  {
+     
+     public static int rest;
+     public static int calculator(int x, int y) // my math-> x = total sum, y = divided by what. result = x % y. rest leftover out
+        {
+            int result = Math.DivRem(x, y, out rest); 
+            return result;
+        }
+  }
 }
