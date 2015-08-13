@@ -60,7 +60,7 @@ namespace FtoC
                     }
                 }
 
-                else //to deal with all other cases that user enters.
+                else //to deal with all other values that user might enter.
                 {
                     Console.WriteLine("Oops! Incorrect number. Please try again.");
                     Console.WriteLine("");
