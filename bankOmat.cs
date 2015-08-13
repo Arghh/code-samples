@@ -68,7 +68,7 @@ namespace BankOmant
   {
      
      public static int rest;
-     public static int calculator(int x, int y) // my math-> x = total sum, y = divided by what. result = x % y. rest leftover out
+     public static int calculator(int x, int y) //math-> x = total sum, y = divided by 50,20,10 or 5. result = x % y. rest sum leftover out
         {
             int result = Math.DivRem(x, y, out rest); 
             return result;
