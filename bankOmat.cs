@@ -1,7 +1,8 @@
 using System;
 using System.Globalization;
 
-
+//atm maschine that will return 50-5euro banknotes. always gives the minimum amout of notes.
+//f.e you withdrawl 130 euro the maschine will return 2x50 1x20 and 1x10.
 namespace BankOmant
 {
   class Program
