@@ -2,6 +2,7 @@
 using System;
 using System.Globalization;
 
+//fahrenheit to celsius and celsius to fahrenheit convertor
 namespace FtoC
 {
     class Program
