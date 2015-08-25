@@ -25,18 +25,31 @@ int strlen(const char* input)
   return count;
 }
 
-//compare two strings. if equal then what
-int strcmp(const char x[], const char y[])
+//compare two strings.
+void strcmp(const char* x, const char* y)
 {
   int count = 0;
   while(x[count] == y[count]) 
   {
     if(x[count] == '\0' || y[count] == '\0')
-      break;
-      count++;    
+    {
+      break;      
+    }
+    else 
+    {
+      count++;
+    }
   }
-  return printf("%d\n",count);
+  if(count == strlen(x) && count == strlen(y))
+  {
+    printf("the strings are equal\n");
+  }
+  else
+  {
+    printf("%i\n", count);
+  }
 }
+
 
 //copy one string to another string
 void strcpy(const char in[], char out[])
@@ -47,7 +60,6 @@ void strcpy(const char in[], char out[])
     }
    printf("%s is now %s \n", in, out);
 }
-
 
 //reverse a string
 void strrev(char *x)
@@ -76,16 +88,16 @@ void strcat(const char* in, char* out)
       a[i] = out[i - x];
     }
 
-  a[x + y] = '\0';//determine the end (??)
+  a[x + y] = '\0';//determine the end
   printf("%s + %s is %s \n", in, out, a);
 }
 
 int main()
 {
-  char p[100] = "Heiei";
+  char p[100] = "Hello";
   char a[100] = "World"; 
-  char m[100] = "testaram";
-  char n[100] = "testarar";
+  char m[100] = "test";
+  char n[100] = "tesT";
 
   print_text(p);
   printf("\nString is %d chars long.\n", strlen(p));
@@ -94,7 +106,6 @@ int main()
   strcat(a, p);
   strcpy(p, a);
   system("pause");
-
 
   return 0;
 }
