@@ -10,7 +10,6 @@ namespace TimeCalculator
   { 
     static void Main(string[] args)
     {     
-      var culture = new CultureInfo("en-US");
       DateCalculator test = new DateCalculator();
       
       try
@@ -44,7 +43,7 @@ namespace TimeCalculator
     {
       string starting = Start.ToString("yyyy-MM-dd");
       string ending = End.ToString("yyyy-MM-dd");
-        double total = (End - Start).TotalDays;
+        var total = (End - Start).TotalDays;
         Console.WriteLine("There are {0} days between {1} and {2}.", total, starting, ending);
     }
 
@@ -83,10 +82,19 @@ namespace TimeCalculator
 
       if (list.Count > 1)
       {
-        var diff = list.Max().Subtract(list.Min());
-        var avgTime = TimeSpan.FromDays(diff.TotalDays / list.Count() - 1);
-        int avgTimeInDays = avgTime.Days;
-        Console.WriteLine("The average time between 2 friday the 13ths is " + avgTimeInDays + " days.");
+        int days = 0;
+        int totaldays = 0;
+        for (int i = 0; i < list.Count -1; i++)
+        {
+          int j = i + 1;
+          days = (list[j].Date - list[i].Date).Days;
+          totaldays += days;
+          j++;
+        }
+
+        int average = totaldays / list.Count()-1;
+       
+        Console.WriteLine("The average time between 2 friday the 13ths is " + average + "days.");
       }
     }
 
