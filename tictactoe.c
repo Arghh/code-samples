@@ -31,7 +31,8 @@ void userMove()
   while (scanf("%d, %d", &x, &y) != 2)
   {
    while (getchar() != '\n');
-    printf ("Enter a row: 0-2 and a column 0-2: like so (0,0)\n");
+    displayBoard();
+    printf ("Enter a row: 0-2 and then a column 0-2: \nlike so 0,0\n");
   }
     if(board[x][y] != ' ')
     {
@@ -59,11 +60,12 @@ void computerMove()
        board[1][1] = 'O';
        break;
      }
+  
    for (x= 3; x > 0; x--)
    {    
      if (board[x][y] == ' ')
      {
-       board[x][y] = 'O';
+      board[x][y] = 'O';
        boolean=1;
        break;
      }
@@ -120,6 +122,7 @@ char checkWinner()
 }
 void play()
 {
+  int count = 1;
   createBoard();
   do
   {
@@ -128,19 +131,21 @@ void play()
     checkWinner();
     if(checkWinner() != ' ')
       break;
+
     computerMove();
     checkWinner();
     if(checkWinner() != ' ')
       break;
+    count++;
   } while(checkWinner() == ' ');
   displayBoard();
   if(checkWinner() == 'X')
   { 
-    printf("You won\n");
+    printf("You won in %d moves\n", count);
   }
   else
   {
-    printf("You lost\n");
+    printf("You lost in %d moves\n", count);
   }
 }
 
@@ -152,7 +157,7 @@ void main()
   play();
   printf("\n");
   printf("\n");
-  printf("Wanna play again? 1 for YES 0 for NO");
+  printf("Press any key and ENTER to play again.\n");
   scanf("%d", &check);
   }while(check);
   system("pause");
