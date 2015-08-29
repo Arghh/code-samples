@@ -5,12 +5,21 @@ namespace hangman
 {
     class Program
     {
-        static void Main(string[] args)
+       static void Main()
         {
-            List<char> guessed = new List<char>();
-            int count = 0;
+           bool asd = true;   
+           while (asd)
+           {
+               play();
+           }         
+        }
+
+       static void play ()
+        {
+         int count = 0;
             int livesLeft = 11;
             int coursorMove = 0;
+            List<char> guessed = new List<char>();
             Console.WriteLine("Enter a word for hangman:");
             char[] word = Console.ReadLine().ToCharArray();
             char[] dummy = new char[word.Length];
@@ -21,11 +30,10 @@ namespace hangman
                 dummy[x] = '_';
             }
             Console.WriteLine("Enter letters until you guess the word or run out of turns.");
-            Console.WriteLine("");
             do
             {
                 Console.WriteLine("");
-                Console.SetCursorPosition(coursorMove,1);
+                Console.SetCursorPosition(coursorMove,2);
                 
                 char a = Console.ReadKey().KeyChar;
                 if (guessed.Contains(a))
@@ -62,16 +70,19 @@ namespace hangman
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("You lost");
                 Console.ResetColor();
-                Console.WriteLine("The word was:");
+                Console.Write("The word was:");
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.Write(word);
+                Console.ResetColor();
+                Console.WriteLine("");
+                Console.WriteLine("");
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("You won");
+                Console.ResetColor();
             }
-            Console.ReadLine();
         }
     }
 }
