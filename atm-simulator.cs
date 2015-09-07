@@ -220,7 +220,7 @@ namespace BankOMat3
         Console.WriteLine("");
         Console.WriteLine("Have a nice day!");
         return true;
-        
+
 
       }
     }
@@ -243,12 +243,59 @@ namespace BankOMat3
         return false;
       }
 
+      //else OK
+      //{
+      //  //adds only to total amount. does not increase the amount of fifties, twenties etc in ATM. does not make sense
+      //  this.total += amount;
+      //  Console.WriteLine("You deposited {0} €", amount);
+      //  return true;       
+      //}
       else
       {
-        //adds only to total amount. does not increase the amount of fifties, twenties etc in ATM. does not make sense
-        this.total += amount;
-        Console.WriteLine("You deposited {0} €", amount);
-        return true;       
+        int restAmount = amount;
+
+        if (amount > 50)
+        {
+          Console.WriteLine("How many 50€ would you like to deposit?");
+          string numberOf50s = Console.ReadLine();
+          int addedFifties = int.Parse(numberOf50s);
+          fifties = fifties + addedFifties;
+          restAmount = amount - addedFifties * 50;
+          total = total + (addedFifties * 50);
+          Console.WriteLine("You deposited " + addedFifties + " 50€.");
+          Console.WriteLine(restAmount + "€ left to deposit.");
+        }
+        
+     Console.WriteLine("How many 20€ would you like to deposit?");
+            string numberOf20s = Console.ReadLine();
+            int addedTwenties = int.Parse(numberOf20s);
+            Console.WriteLine(total);
+            twenties = twenties + addedTwenties;
+            restAmount = restAmount - addedTwenties * 20;
+            total = total + (addedTwenties * 20);
+            Console.WriteLine("You deposited " + addedTwenties + " 20€.");
+            Console.WriteLine(restAmount + "€ left to deposit.");
+            Console.WriteLine(total);
+ 
+      Console.WriteLine("How many 10€ would you like to deposit?");
+            string numberOf10s = Console.ReadLine();
+            int addedTens = int.Parse(numberOf10s);
+            restAmount = restAmount - addedTens * 10;
+            tens = tens + addedTens;
+            total = total + (addedTens * 10);
+            Console.WriteLine("You deposited " + addedTens + " 10€.");
+            Console.WriteLine(restAmount + "€ left to deposit.");
+            Console.WriteLine(total);
+   
+   Console.WriteLine("How many 5€ would you like to deposit?");
+            string numberOf5s = Console.ReadLine();
+            int addedFives = int.Parse(numberOf5s);
+            restAmount = restAmount - addedFives * 5;
+            fives = fives + addedFives;
+            total = total + (addedFives * 5);
+            Console.WriteLine("You deposited " + addedFives + " 5€.");
+            Console.WriteLine(total);
+        return true;
       }
     }
 
