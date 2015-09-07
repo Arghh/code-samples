@@ -103,22 +103,7 @@ char checkWinner()
   {
        return board[0][2];
   }
-
   return ' ';
- /* int i;
-  for (i = 0; i < 3; i++)
-  {
-    if(board[i][0] ==  board[i][1] == board[i][2]) //why wont work
-
-    {
-      return board[i][0];
-    }
-    if(board[0][i] == board[1][i] && board[2][i])
-    {
-      return board[0][i];
-    }
-  }
-  return ' ';*/
 }
 void play()
 {
