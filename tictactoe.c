@@ -114,9 +114,6 @@ void play()
     displayBoard();
     userMove();
     checkWinner();
-    if(checkWinner() != ' ')
-      break;
-
     computerMove();
     checkWinner();
     if(checkWinner() != ' ')
