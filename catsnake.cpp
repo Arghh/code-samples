@@ -23,6 +23,7 @@ private:
   sf::Font font;
   sf::Clock clock;
   int score;
+  int highscore;
   bool movingLeft, movingUp, movingRight, movingDown, space;
 
 public:
@@ -30,6 +31,7 @@ public:
   CatSnake() : window(sf::VideoMode(800, 600), "CatSnake")
   {
     score = 0;
+    highscore = 0;
     window.setFramerateLimit(60);//alternative  Window.EnableVerticalSync(true);
     background.loadFromFile("BACKGROUND-HERE.png");
     catface.loadFromFile("PLAYER-HERE.png");
@@ -101,8 +103,17 @@ void eatFood()
       clock.restart();
       food.setPosition(posx,posy);
     }
-    showScore.setString("Score: " + int2Str(score));
+    showScore.setString("Score: " + int2Str(score) + "\nHighscore: " + int2Str(showHighScore(score)));
   }
+
+int showHighScore(int score)
+{
+  if(score > highscore)
+  { 
+    highscore = score;
+  }
+  return highscore;
+}
 
 bool timeLeft()
 {
