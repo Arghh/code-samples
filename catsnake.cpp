@@ -1,3 +1,4 @@
+//using SFML library. http://www.sfml-dev.org
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <stdlib.h>
