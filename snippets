@@ -1,0 +1,215 @@
+namespace Snippets
+{
+  using System;
+  using System.Collections.Generic;
+  using System.Linq;
+
+  class Program
+  {
+    static void Main(string[] args)
+    {
+      const int A = 2;
+      const int B = 5;
+      const int C = -4;
+      const string D = "i have like 10 vowels.";
+
+      string[] tokens = { "1", "2", "2", "1", "65", "11" };
+
+      //convert everything from string array to int array
+      var numbers = Array.ConvertAll(tokens, int.Parse);
+
+      var helper = new Helpers();
+      helper.MinimumOfTwo(A, B);
+      helper.MedianOfThree(A, B, C);
+      helper.Rounding(B, A);
+      helper.VowelCount(D);
+      helper.FahrenheitToCelsius(-155);
+      helper.SumOfDigits(1591);
+      helper.DiceRolling(0.59558786964);
+      helper.ReverseString(D);
+      helper.WeightedSumOfDigits(1776);
+      helper.Triangels(3, 4, 5);
+      var testCase = helper.ArrayChecksum(numbers);
+      helper.ArithmeticProgression(3, 0, 10);
+
+      Console.WriteLine(testCase);
+      Console.ReadLine();
+    }
+  }
+
+
+
+
+  public class Helpers
+  {
+
+
+    public int MinimumOfTwo(int a, int b)
+    {
+      return a < b ? a : b;
+    }
+
+
+
+    public int MedianOfThree(int a, int b, int c)
+    {
+      int[] numbers = { a, b, c };
+      var result = 0;
+
+      foreach (var t in numbers)
+      {
+        if (t != numbers.Max() && t != numbers.Min())
+        {
+          result = t;
+        }
+      }
+      return result;
+    }
+
+
+
+    //Devive first by second and return number rounded to nearest integer.
+    public int Rounding(int a, int b)
+    {
+      return Convert.ToInt32(Math.Round((decimal)a / b));
+    }
+
+
+
+    //counts the vowels in an input string
+    public int VowelCount(string a)
+    {
+      var vowels = new[] { 'a', 'o', 'u', 'i', 'e', 'y' };
+      var line = a.ToCharArray();
+      return line.Sum(t => vowels.Count(t1 => t == t1));
+    }
+
+
+
+    public double FahrenheitToCelsius(int f)
+    {
+      return 5.0 / 9.0 * (f - 32);
+    }
+
+
+
+    //For example sum of 1001 is 1+0+0+1=2
+    public int SumOfDigits(int sum)
+    {
+      var output = 0;
+      while (sum != 0)
+      {
+        output += sum % 10;
+        sum /= 10;
+      }
+      return output;
+    }
+
+
+
+    //simulation of dice rolling by the values coming from a random numbers generator. from 0 (inclusive) to 1 (not inclusive) 
+    public int DiceRolling(double number)
+    {
+      double output = number * 6;
+      int result = (int)output + 1;
+      return result;
+    }
+
+
+
+    public char[] ReverseString(string input)
+    {
+      IEnumerable<char> reverse = input.ToCharArray().Reverse();
+      return reverse.ToArray();
+    }
+
+
+
+    //How many times 1-s, 2-s, 3-s ... N-s (In that order) are encountered in an array. F.E 10 1-s, 20 2-s and so on.
+    public string ArrayCounters(int[] numbers)
+    {
+      string result = String.Empty;
+      var dictionary = new Dictionary<int, int>();
+      foreach (int n in numbers)
+      {
+        if (!dictionary.ContainsKey(n))
+        {
+          dictionary[n] = 0;
+        }
+        else
+        {
+          dictionary[n]++;
+        }
+      }
+
+      foreach (var number in dictionary.OrderBy(i => i.Key))
+      {
+        result = result + (number.Value + 1) + " ";
+      }
+      return result;
+    }
+
+
+
+    //This program resembles more complex algorithms for calculation CRC and other checksums and also hash-functions on character strings.
+    //F.E WeightedSumOfDigits => wsd(1776) = 1 * 1 + 7 * 2 + 7 * 3 + 6 * 4 = 60
+    public int WeightedSumOfDigits(int number)
+    {
+      int output = 0;
+
+      List<int> listOfInts = new List<int>();
+      while (number > 0)
+      {
+        listOfInts.Add(number % 10);
+        number = number / 10;
+      }
+
+      listOfInts.Reverse();
+
+      int[] outputs = listOfInts.ToArray();
+
+      for (int j = 0; j < outputs.Length; j++)
+      {
+        var temp = outputs[j] * (j + 1);
+        output = output + temp;
+      }
+
+      return output;
+    }
+
+
+
+    //Check if 3 digits can form a triangel or not. 
+    public bool Triangels(int a, int b, int c)
+    {
+      return a + b > c && c + a > b && c + b > a;
+    }
+
+
+
+    // check whether resulting array is correct or not
+    //F.E any bank card you use has a checksum in the last digit of its number so any device could prevent you from entering wrong number by mistake 
+    public long ArrayChecksum(int[] numbers)
+    {
+      var result = numbers.Aggregate(0L, (current, t) => (current + Convert.ToInt64(t)) * 113 % 10000007);
+      return result;
+    }
+
+
+
+    //arithmetic sequence - series of numbers with a special property - each value is followed by the other, greater by predefined amount (step).
+    //F.E: A + (A + B) + (A + 2B) + (A + 3B) + ...
+    public int ArithmeticProgression(int firstValue, int step, int numberOfValues)
+    {
+      int output = 0;
+
+      for (int x = 1; x < numberOfValues; x++)
+      {
+        output = output + (firstValue + step * x);
+      }
+
+      return output + firstValue;
+    }
+
+  }
+}
