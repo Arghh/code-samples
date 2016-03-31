@@ -1,8 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Snippets
 {
-  using System;
-  using System.Collections.Generic;
-  using System.Linq;
+  using System.Numerics;
 
   class Program
   {
@@ -12,10 +14,8 @@ namespace Snippets
       const int B = 5;
       const int C = -4;
       const string D = "i have like 10 vowels.";
-
-      string[] tokens = { "1", "2", "2", "1", "65", "11" };
-
-      //convert everything from string array to int array
+      BigInteger bigNumber = BigInteger.Parse("29090180355503362256910111038089984964854261893");
+      string[] tokens = { "1", "10", "5", "2", "65", "11" };
       var numbers = Array.ConvertAll(tokens, int.Parse);
 
       var helper = new Helpers();
@@ -29,10 +29,13 @@ namespace Snippets
       helper.ReverseString(D);
       helper.WeightedSumOfDigits(1776);
       helper.Triangels(3, 4, 5);
-      var testCase = helper.ArrayChecksum(numbers);
+      helper.ArrayChecksum(numbers);
+      helper.ArrayCounters(numbers);
       helper.ArithmeticProgression(3, 0, 10);
+      helper.Palindromes(D);
+      helper.SortWithIndexes(numbers);
+      helper.FindNumberInFibonacciSequel(bigNumber);
 
-      Console.WriteLine(testCase);
       Console.ReadLine();
     }
   }
@@ -134,7 +137,7 @@ namespace Snippets
       {
         if (!dictionary.ContainsKey(n))
         {
-          dictionary[n] = 0;
+          dictionary[n] = 1;
         }
         else
         {
@@ -144,7 +147,7 @@ namespace Snippets
 
       foreach (var number in dictionary.OrderBy(i => i.Key))
       {
-        result = result + (number.Value + 1) + " ";
+        result = result + number.Value + " ";
       }
       return result;
     }
@@ -211,5 +214,94 @@ namespace Snippets
       return output + firstValue;
     }
 
+
+
+    public bool Palindromes(string test)
+    {
+      int start = 0;
+      int end = test.Length - 1;
+
+      while (true)
+      {
+        if (start > end)
+        {
+          return true;
+        }
+
+        char a = test[start];
+        char b = test[end];
+        if (char.ToLower(a) != char.ToLower(b))
+        {
+          return false;
+        }
+        start++;
+        end--;
+      }
+    }
+
+
+
+    public void SortWithIndexes(int[] numbers)
+    {
+      List<int> inputOriginal = numbers.ToList();
+      int swaps = 0;
+      int stop;
+      string result = String.Empty;
+      do
+      {
+        stop = swaps;
+        for (int i = 0; i < numbers.Length - 1; i++)
+        {
+          if (numbers[i + 1] < numbers[i])
+          {
+            int temp = numbers[i];
+            numbers[i] = numbers[i + 1];
+            numbers[i + 1] = temp;
+            swaps++;
+            Console.WriteLine(string.Join(" ", numbers));
+          }
+        }
+      } while (swaps != stop);
+      Console.WriteLine("It took {0} swaps to sort the array.", swaps);
+      foreach (var number in numbers)
+      {
+        //index starts normal at 0 we start with position 1.
+        var index = inputOriginal.IndexOf(number) + 1;
+        Console.WriteLine("Number {0} was at position {1} before.", number, index);
+      }
+    }
+
+
+
+    public void FindNumberInFibonacciSequel(BigInteger number)
+    {
+      BigInteger[] fibonacciSequel = new BigInteger[10000];
+      fibonacciSequel[0] = 0;
+      fibonacciSequel[1] = 1;
+      long result = 0;
+      if (number == fibonacciSequel[0])
+      {
+        result = 0;
+      }
+
+      if (number == fibonacciSequel[1])
+      {
+        result = 1;
+      }
+
+      for (long j = 2; j < fibonacciSequel.Length; j++)
+      {
+        fibonacciSequel[0] = 0;
+        fibonacciSequel[1] = 1;
+        fibonacciSequel[j] = fibonacciSequel[j - 1] + fibonacciSequel[j - 2];
+
+        if (number == fibonacciSequel[j])
+        {
+          result = j;
+          break;
+        }
+      }
+      Console.WriteLine("The Positon of {0} in FibonacciSequel is {1}", number, result);
+    }
   }
 }
