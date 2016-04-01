@@ -16,6 +16,8 @@ namespace Snippets
       const string D = "i have like 10 vowels.";
       BigInteger bigNumber = BigInteger.Parse("29090180355503362256910111038089984964854261893");
       string[] tokens = { "1", "10", "5", "2", "65", "11" };
+
+      //convert everything from string array to int array
       var numbers = Array.ConvertAll(tokens, int.Parse);
 
       var helper = new Helpers();
@@ -35,7 +37,10 @@ namespace Snippets
       helper.Palindromes(D);
       helper.SortWithIndexes(numbers);
       helper.FindNumberInFibonacciSequel(bigNumber);
+      helper.GreatestCommonDivisor(525,17645);
+      var testcase = helper.LeastCommonMultiple(20, 35);
 
+      Console.WriteLine(testcase);
       Console.ReadLine();
     }
   }
@@ -302,6 +307,36 @@ namespace Snippets
         }
       }
       Console.WriteLine("The Positon of {0} in FibonacciSequel is {1}", number, result);
+    }
+
+
+
+    public int GreatestCommonDivisor(int a, int b)
+    {
+      while (a != b)
+      {
+        if (a > b)
+        {
+          a -= b;
+        }
+        else
+        {
+          b -= a;
+        }
+      }
+      int gcd = a;
+
+      return gcd;
+    }
+
+
+    //of a and b is such an integer, that it is divisible by both of them (and is the smallest of all possible)
+    public int LeastCommonMultiple(int a, int b)
+    {
+      int d = this.GreatestCommonDivisor(a, b);
+      int lcm = a * b / d;
+
+      return lcm;
     }
   }
 }
