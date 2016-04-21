@@ -39,7 +39,7 @@ namespace Snippets
       helper.FindNumberInFibonacciSequel(bigNumber);
       helper.GreatestCommonDivisor(525,17645);
       var testcase = helper.LeastCommonMultiple(20, 35);
-
+      helper.FindTheLastRemainingPerson(36,3);
       Console.WriteLine(testcase);
       Console.ReadLine();
     }
@@ -337,6 +337,26 @@ namespace Snippets
       int lcm = a * b / d;
 
       return lcm;
+    }
+
+    public void FindTheLastRemainingPerson(int persons, int step)
+    {
+      var listOfPeople = new List<int>();
+
+      for (int i = 0; i < persons; i++)
+      {
+        listOfPeople.Add(i + 1);
+      }
+
+      int counter = 0;
+      while (listOfPeople.Count != 1)
+      {
+        counter = (counter + step - 1) % listOfPeople.Count;
+        var person = listOfPeople[counter];
+        listOfPeople.RemoveAt(counter);
+        Console.WriteLine("Removed: " +  person);
+      }
+      Console.WriteLine("Winner: " + listOfPeople[0]);
     }
   }
 }
