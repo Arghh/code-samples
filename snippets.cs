@@ -40,6 +40,7 @@ namespace Snippets
       helper.GreatestCommonDivisor(525,17645);
       var testcase = helper.LeastCommonMultiple(20, 35);
       helper.FindTheLastRemainingPerson(36,3);
+      helper.Int32ToBits(33);
       Console.WriteLine(testcase);
       Console.ReadLine();
     }
@@ -239,6 +240,7 @@ namespace Snippets
         {
           return false;
         }
+
         start++;
         end--;
       }
@@ -357,6 +359,29 @@ namespace Snippets
         Console.WriteLine("Removed: " +  person);
       }
       Console.WriteLine("Winner: " + listOfPeople[0]);
+    }
+
+    public void Int32ToBits(int number)
+    {
+      int ones = 0;
+      char[] bits = new char[32];
+      int start = 0;
+      int counter = 31;
+      while (start < 32)
+      {
+        if ((number & (1 << start)) != 0)
+        {
+          bits[counter] = '1';
+        }
+        else
+        {
+          bits[counter] = 'O';
+        }
+        counter--;
+        start++;
+      }
+      string result = new string(bits);
+      Console.WriteLine("Number {0} looks like this: {1} in Binary.", number, result);
     }
   }
 }
