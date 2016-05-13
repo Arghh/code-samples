@@ -16,7 +16,7 @@ namespace Snippets
       const string D = "i have like 10 vowels.";
       BigInteger bigNumber = BigInteger.Parse("29090180355503362256910111038089984964854261893");
       string[] tokens = { "1", "10", "5", "2", "65", "11" };
-
+      string[] blackJack = { "A", "3", "3", "3", "A"};
       //convert everything from string array to int array
       var numbers = Array.ConvertAll(tokens, int.Parse);
 
@@ -38,9 +38,10 @@ namespace Snippets
       helper.SortWithIndexes(numbers);
       helper.FindNumberInFibonacciSequel(bigNumber);
       helper.GreatestCommonDivisor(525,17645);
-      var testcase = helper.LeastCommonMultiple(20, 35);
+      helper.LeastCommonMultiple(20, 35);
       helper.FindTheLastRemainingPerson(36,3);
       helper.Int32ToBits(33);
+      var testcase = helper.Blackjack(blackJack);
       Console.WriteLine(testcase);
       Console.ReadLine();
     }
@@ -137,7 +138,7 @@ namespace Snippets
     //How many times 1-s, 2-s, 3-s ... N-s (In that order) are encountered in an array. F.E 10 1-s, 20 2-s and so on.
     public string ArrayCounters(int[] numbers)
     {
-      string result = String.Empty;
+      string result = string.Empty;
       var dictionary = new Dictionary<int, int>();
       foreach (int n in numbers)
       {
@@ -253,7 +254,7 @@ namespace Snippets
       List<int> inputOriginal = numbers.ToList();
       int swaps = 0;
       int stop;
-      string result = String.Empty;
+      string result = string.Empty;
       do
       {
         stop = swaps;
@@ -382,6 +383,46 @@ namespace Snippets
       }
       string result = new string(bits);
       Console.WriteLine("Number {0} looks like this: {1} in Binary.", number, result);
+    }
+
+    public string Blackjack(string [] input)
+    {
+      string answer = string.Empty;
+      int score = 0;
+      int ace = 0;
+
+      foreach (var card in input)
+      {
+        switch (card)
+        {
+          case "T": case "J": case "Q": case "K":
+            score = score + 10;
+            break;
+          case "A":         
+            if (score >= 11)
+            {
+              score = score + 1;
+            }
+            else
+            {
+              score = score + 11;
+            }
+            ace++;
+            break;
+          default:
+            score = score +  int.Parse(card);
+            break;
+        }
+      }
+      if (score > 21)
+      {
+        answer = answer + "Bust" + " ";
+      }
+      else
+      {
+        answer = answer + score + " ";
+      }
+      return answer;
     }
   }
 }
