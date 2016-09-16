@@ -1,3 +1,3 @@
 ## code-samples
 
-Examples of my code. Mostly tiny programs in C#, C++, C and JS.
+Examples of my code. Mostly tiny snippets in C#, Java and C++;
